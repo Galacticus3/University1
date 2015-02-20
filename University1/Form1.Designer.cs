@@ -65,12 +65,15 @@
             this.lblGrSbjSubject = new System.Windows.Forms.Label();
             this.btnShowAllGropSubj = new System.Windows.Forms.Button();
             this.btnAddGrSubj = new System.Windows.Forms.Button();
-            this.btnUpdateGrSubj = new System.Windows.Forms.Button();
             this.btnDeleteGrSubj = new System.Windows.Forms.Button();
+            this.dtGridGrOrSubj = new System.Windows.Forms.DataGridView();
+            this.btnAllSubjetcsOfGroup = new System.Windows.Forms.Button();
+            this.btnSubjectInGroups = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridSubjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridGroupStud)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtGridGrOrSubj)).BeginInit();
             this.SuspendLayout();
             // 
             // btnShowAllGroups
@@ -113,7 +116,6 @@
             this.dtGridGroups.ReadOnly = true;
             this.dtGridGroups.Size = new System.Drawing.Size(247, 198);
             this.dtGridGroups.TabIndex = 3;
-            this.dtGridGroups.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridGroups_CellClick);
             this.dtGridGroups.SelectionChanged += new System.EventHandler(this.dtGridGroups_SelectionChanged);
             // 
             // dtGridSubjects
@@ -126,7 +128,7 @@
             this.dtGridSubjects.ReadOnly = true;
             this.dtGridSubjects.Size = new System.Drawing.Size(260, 198);
             this.dtGridSubjects.TabIndex = 4;
-            this.dtGridSubjects.SelectionChanged += new System.EventHandler(this.dtGridSubjects_SelectionChanged);
+            this.dtGridSubjects.SelectionChanged += new System.EventHandler(this.dtGridSubjects_SelectionChanged_1);
             // 
             // dtGridStudents
             // 
@@ -160,7 +162,6 @@
             this.txtStudFName.Name = "txtStudFName";
             this.txtStudFName.Size = new System.Drawing.Size(62, 20);
             this.txtStudFName.TabIndex = 9;
-            this.txtStudFName.TextChanged += new System.EventHandler(this.txtStudFName_TextChanged);
             // 
             // txtStudLName
             // 
@@ -202,7 +203,6 @@
             this.lblStudent.Size = new System.Drawing.Size(143, 13);
             this.lblStudent.TabIndex = 14;
             this.lblStudent.Text = "Enter info about new student";
-            this.lblStudent.Click += new System.EventHandler(this.lblStudent_Click);
             // 
             // lblStudId
             // 
@@ -382,7 +382,6 @@
             this.cmbGrSbjSubject.Name = "cmbGrSbjSubject";
             this.cmbGrSbjSubject.Size = new System.Drawing.Size(103, 21);
             this.cmbGrSbjSubject.TabIndex = 34;
-            this.cmbGrSbjSubject.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // lblGrSbjGroup
             // 
@@ -422,20 +421,9 @@
             this.btnAddGrSubj.UseVisualStyleBackColor = true;
             this.btnAddGrSubj.Click += new System.EventHandler(this.btnAddGrSubj_Click);
             // 
-            // btnUpdateGrSubj
-            // 
-            this.btnUpdateGrSubj.Enabled = false;
-            this.btnUpdateGrSubj.Location = new System.Drawing.Point(531, 349);
-            this.btnUpdateGrSubj.Name = "btnUpdateGrSubj";
-            this.btnUpdateGrSubj.Size = new System.Drawing.Size(196, 23);
-            this.btnUpdateGrSubj.TabIndex = 39;
-            this.btnUpdateGrSubj.Text = "Update current group - subject";
-            this.btnUpdateGrSubj.UseVisualStyleBackColor = true;
-            this.btnUpdateGrSubj.Click += new System.EventHandler(this.btnUpdateGrSubj_Click);
-            // 
             // btnDeleteGrSubj
             // 
-            this.btnDeleteGrSubj.Location = new System.Drawing.Point(531, 378);
+            this.btnDeleteGrSubj.Location = new System.Drawing.Point(531, 349);
             this.btnDeleteGrSubj.Name = "btnDeleteGrSubj";
             this.btnDeleteGrSubj.Size = new System.Drawing.Size(196, 23);
             this.btnDeleteGrSubj.TabIndex = 40;
@@ -443,14 +431,44 @@
             this.btnDeleteGrSubj.UseVisualStyleBackColor = true;
             this.btnDeleteGrSubj.Click += new System.EventHandler(this.btnDeleteGrSubj_Click);
             // 
+            // dtGridGrOrSubj
+            // 
+            this.dtGridGrOrSubj.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtGridGrOrSubj.Location = new System.Drawing.Point(531, 407);
+            this.dtGridGrOrSubj.Name = "dtGridGrOrSubj";
+            this.dtGridGrOrSubj.Size = new System.Drawing.Size(368, 144);
+            this.dtGridGrOrSubj.TabIndex = 41;
+            // 
+            // btnAllSubjetcsOfGroup
+            // 
+            this.btnAllSubjetcsOfGroup.Location = new System.Drawing.Point(531, 378);
+            this.btnAllSubjetcsOfGroup.Name = "btnAllSubjetcsOfGroup";
+            this.btnAllSubjetcsOfGroup.Size = new System.Drawing.Size(196, 23);
+            this.btnAllSubjetcsOfGroup.TabIndex = 42;
+            this.btnAllSubjetcsOfGroup.Text = "Sujects in current group";
+            this.btnAllSubjetcsOfGroup.UseVisualStyleBackColor = true;
+            this.btnAllSubjetcsOfGroup.Click += new System.EventHandler(this.btnAllSubjetcsOfGroup_Click);
+            // 
+            // btnSubjectInGroups
+            // 
+            this.btnSubjectInGroups.Location = new System.Drawing.Point(733, 378);
+            this.btnSubjectInGroups.Name = "btnSubjectInGroups";
+            this.btnSubjectInGroups.Size = new System.Drawing.Size(166, 23);
+            this.btnSubjectInGroups.TabIndex = 43;
+            this.btnSubjectInGroups.Text = "Groups wich have curr subject";
+            this.btnSubjectInGroups.UseVisualStyleBackColor = true;
+            this.btnSubjectInGroups.Click += new System.EventHandler(this.btnSubjectInGroups_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1467, 552);
+            this.ClientSize = new System.Drawing.Size(1467, 558);
+            this.Controls.Add(this.btnSubjectInGroups);
+            this.Controls.Add(this.btnAllSubjetcsOfGroup);
+            this.Controls.Add(this.dtGridGrOrSubj);
             this.Controls.Add(this.btnDeleteGrSubj);
-            this.Controls.Add(this.btnUpdateGrSubj);
             this.Controls.Add(this.btnAddGrSubj);
             this.Controls.Add(this.btnShowAllGropSubj);
             this.Controls.Add(this.lblGrSbjSubject);
@@ -491,11 +509,11 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "University";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtGridGroups)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridSubjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridStudents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridGroupStud)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtGridGrOrSubj)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -540,8 +558,10 @@
         private System.Windows.Forms.Label lblGrSbjSubject;
         private System.Windows.Forms.Button btnShowAllGropSubj;
         private System.Windows.Forms.Button btnAddGrSubj;
-        private System.Windows.Forms.Button btnUpdateGrSubj;
         private System.Windows.Forms.Button btnDeleteGrSubj;
+        private System.Windows.Forms.DataGridView dtGridGrOrSubj;
+        private System.Windows.Forms.Button btnAllSubjetcsOfGroup;
+        private System.Windows.Forms.Button btnSubjectInGroups;
     }
 }
 

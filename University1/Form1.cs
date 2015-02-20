@@ -205,9 +205,13 @@ namespace University1
         {
             int curRowId = Convert.ToInt32(dtGridStudents.CurrentRow.Cells[0].Value);
             DataRowView cmbView = cmbStudGroup.SelectedItem as DataRowView;
+            // (cmbStudGroup.SelectedItem as DataRowView)["Id"].ToString();
             bool isValid = txtFieldNotEmpty(txtStudFName, lblStudFirstName) && txtFieldNotEmpty(txtStudLName, lblStudLastName) &&
                            txtFieldNotEmpty(txtStudAge, lblStudAge) && txtFieldIsInt32(txtStudAge, lblStudAge) &&
                            cmbFieldNotEmpty(cmbStudGroup, lblStudGroup) && cmbValueMemeberIsInt32(cmbView["Id"].ToString(), lblStudGroup);
+
+           
+
             if ((dtGridStudents.DataSource == null) || !isValid)
             {
                 return;
@@ -246,11 +250,6 @@ namespace University1
             MessageBox.Show(da.SqlAnswerString);
         }
 
-        private void btnUpdateGrSubj_Click(object sender, EventArgs e)
-        {
-            //
-        }
-
         private void btnDeleteGrSubj_Click(object sender, EventArgs e)
         {
             int curRowId = Convert.ToInt32(dtGridGroupStud.CurrentRow.Cells[0].Value);
@@ -264,6 +263,29 @@ namespace University1
         }
 
 
+        private void btnAllSubjetcsOfGroup_Click(object sender, EventArgs e)
+        {
+            DataRowView cmbView = cmbGrSbjGroup.SelectedItem as DataRowView;
+            bool isValid = cmbFieldNotEmpty(cmbGrSbjGroup, lblGrSbjGroup) && cmbValueMemeberIsInt32(cmbView["Id"].ToString(), lblGrSbjGroup);
+            if (!isValid)
+            {
+                return;
+            }
+            dtGridGrOrSubj.DataSource = da.LoadAllSubjectsInGroup(Convert.ToInt32(cmbView["Id"]));
+        }
+
+        private void btnSubjectInGroups_Click(object sender, EventArgs e)
+        {
+            DataRowView cmbView = cmbGrSbjSubject.SelectedItem as DataRowView;
+            bool isValid = cmbFieldNotEmpty(cmbGrSbjSubject, lblGrSbjSubject) && cmbValueMemeberIsInt32(cmbView["Id"].ToString(), lblGrSbjSubject);
+            if (!isValid)
+            {
+                return; 
+            }
+            dtGridGrOrSubj.DataSource = da.LoadGroupsWithCurrSubject(Convert.ToInt32(cmbView["Id"]));
+        }
+
+
         private void dtGridGroups_SelectionChanged(object sender, EventArgs e)
         {
             int RowIndex = Convert.ToInt32(dtGridGroups.CurrentRow.Index);
@@ -271,6 +293,10 @@ namespace University1
             txtGroup.Text = dtGridGroups.Rows[RowIndex].Cells[1].Value.ToString();
         }
         private void dtGridSubjects_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void dtGridSubjects_SelectionChanged_1(object sender, EventArgs e)
         {
             int RowIndex = Convert.ToInt32(dtGridSubjects.CurrentRow.Index);
 
@@ -293,19 +319,7 @@ namespace University1
             cmbGrSbjSubject.Text = dtGridGroupStud.Rows[RowIndex].Cells[2].Value.ToString();
         }
 
-
-
-
-
-
-
-
-
-        private void lblStudent_Click(object sender, EventArgs e) { }
-        private void Form1_Load(object sender, EventArgs e) { }
-        private void dtGridGroups_CellClick(object sender, DataGridViewCellEventArgs e) { }
-        private void txtStudFName_TextChanged(object sender, EventArgs e) { }
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) { }
+        
 
     }
 }

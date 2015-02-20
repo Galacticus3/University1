@@ -99,8 +99,52 @@ namespace DAL
             return groupsubjDT;
         }
 
+        public DataTable LoadAllSubjectsInGroup(int grId)
+        {
+            DataTable dt = new DataTable();
+            string txtQuery = @"SELECT GroupsSubjects.Id, Groups.Name, Subjects.Name
+                                FROM GroupsSubjects
+                                INNER JOIN Groups
+                                ON GroupsSubjects.GroupId = Groups.Id
+                                INNER JOIN Subjects
+                                ON GroupsSubjects.SubjectId = Subjects.Id
+                                WHERE Groups.Id = @grId";
+            using (SqlConnection connection = new SqlConnection(configConnection))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(txtQuery, connection);
+                command.Parameters.Add("@grId", SqlDbType.Int).Value = grId;
+                command.ExecuteNonQuery();
+                dt.Load(command.ExecuteReader());
+                connection.Close();
+            }
+            return dt;
+        }
 
-        //Fun with Groups
+        public DataTable LoadGroupsWithCurrSubject(int sbjId)
+        {
+            DataTable dt = new DataTable();
+            string txtQuery = @"SELECT GroupsSubjects.Id, Groups.Name, Subjects.Name
+                                FROM GroupsSubjects
+                                INNER JOIN Groups
+                                ON GroupsSubjects.GroupId = Groups.Id
+                                INNER JOIN Subjects
+                                ON GroupsSubjects.SubjectId = Subjects.Id
+                                WHERE Subjects.Id = @sbjId";
+            using (SqlConnection connection = new SqlConnection(configConnection))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(txtQuery, connection);
+                command.Parameters.Add("@sbjId", SqlDbType.Int).Value = sbjId;
+                command.ExecuteNonQuery();
+                dt.Load(command.ExecuteReader());
+                connection.Close();
+            }
+            return dt;
+        }
+
+
+        //Fun with Groups   
 
         /// <summary>
         /// SQL query wich add new group
@@ -377,6 +421,9 @@ namespace DAL
                 SqlAnswerString = ex.ToString();
             }
         }
+
+
+
 
     }
 }
