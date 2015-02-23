@@ -288,9 +288,11 @@ namespace University1
 
         private void dtGridGroups_SelectionChanged(object sender, EventArgs e)
         {
-            int RowIndex = Convert.ToInt32(dtGridGroups.CurrentRow.Index);
-
-            txtGroup.Text = dtGridGroups.Rows[RowIndex].Cells[1].Value.ToString();
+            if (dtGridGroups.CurrentRow != null) 
+            {
+                int RowIndex = dtGridGroups.CurrentRow.Index;
+                txtGroup.Text = dtGridGroups.Rows[RowIndex].Cells[1].Value.ToString();
+            }
         }
         private void dtGridSubjects_SelectionChanged(object sender, EventArgs e)
         {
@@ -298,25 +300,36 @@ namespace University1
         }
         private void dtGridSubjects_SelectionChanged_1(object sender, EventArgs e)
         {
-            int RowIndex = Convert.ToInt32(dtGridSubjects.CurrentRow.Index);
-
-            txtSubject.Text = dtGridSubjects.Rows[RowIndex].Cells[1].Value.ToString();
+            if (dtGridSubjects.CurrentRow != null) 
+            {
+                int RowIndex = dtGridSubjects.CurrentRow.Index;
+                txtSubject.Text = dtGridSubjects.Rows[RowIndex].Cells[1].Value.ToString();
+            }
+     
         }
         private void dtGridStudents_SelectionChanged(object sender, EventArgs e)
         {
-            int RowIndex = Convert.ToInt32(dtGridStudents.CurrentRow.Index);
+            if (dtGridStudents.CurrentRow != null) 
+            {
+                int RowIndex = Convert.ToInt32(dtGridStudents.CurrentRow.Index);
 
-            txtStudFName.Text = dtGridStudents.Rows[RowIndex].Cells[1].Value.ToString();
-            txtStudLName.Text = dtGridStudents.Rows[RowIndex].Cells[2].Value.ToString();
-            txtStudAge.Text = dtGridStudents.Rows[RowIndex].Cells[3].Value.ToString();
-            cmbStudGroup.Text = dtGridStudents.Rows[RowIndex].Cells[4].Value.ToString();
+                txtStudFName.Text = dtGridStudents.Rows[RowIndex].Cells[1].Value.ToString();
+                txtStudLName.Text = dtGridStudents.Rows[RowIndex].Cells[2].Value.ToString();
+                txtStudAge.Text = dtGridStudents.Rows[RowIndex].Cells[3].Value.ToString();
+                cmbStudGroup.Text = dtGridStudents.Rows[RowIndex].Cells[4].Value.ToString();
+            }
+          
         }
         private void dtGridGroupStud_SelectionChanged(object sender, EventArgs e)
         {
-            int RowIndex = Convert.ToInt32(dtGridGroupStud.CurrentRow.Index);
+            if (dtGridGroupStud.CurrentRow != null) 
+            {
+                int RowIndex = Convert.ToInt32(dtGridGroupStud.CurrentRow.Index);
 
-            cmbGrSbjGroup.Text = dtGridGroupStud.Rows[RowIndex].Cells[1].Value.ToString();
-            cmbGrSbjSubject.Text = dtGridGroupStud.Rows[RowIndex].Cells[2].Value.ToString();
+                cmbGrSbjGroup.Text = dtGridGroupStud.Rows[RowIndex].Cells[1].Value.ToString();
+                cmbGrSbjSubject.Text = dtGridGroupStud.Rows[RowIndex].Cells[2].Value.ToString();
+            }
+     
         }
 
         
